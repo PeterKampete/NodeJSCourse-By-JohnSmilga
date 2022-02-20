@@ -1,7 +1,12 @@
-const http = require("http");
-const server = http.createServer((req, res) => {
-  res.write('Welcome');
-//   res.end();
+const express = require("express");
+const app = express();
+const {products} = require('./data')
+
+app.get("/", (req, res) => {
+  res.json(products);
+  console.log(res.contentType)
 });
 
-server.listen(9000);
+app.listen(9000, () => {
+  console.log("server is running on port 9000");
+});
