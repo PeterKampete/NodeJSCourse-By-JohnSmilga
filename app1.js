@@ -1,0 +1,51 @@
+const express = require("express");
+const app = express();
+const { products } = require("./data");
+
+app.get("/", (req, res) => {
+  res.send('<h1>Home Page</h1><a href = "/api/products">Products</a>');
+});
+
+app.get("/api/products", (req, res) => {
+  const newProducts = products.map((product) => {
+    const { id, name, image } = product;
+    return { id, name, image };
+  });
+  res.json(newProducts);
+});
+app.get("/api/products/:productId", (req, res) => {
+  const { productId } = req.params;
+  const singleProduct = products.find(
+    (product) => product.id === Number(productId)
+  );
+  if (!singleProduct) {
+    res.status(404).send("Product not found");
+  } else res.json(singleProduct);
+});
+
+app.get("/api/v1/query", (req, res) => {
+  let searchedProducts = [...products];
+  const { search, limit } = req.query;
+  console.log(req.query);
+  if (search) {
+    searchedProducts = searchedProducts.filter((product) =>
+      product.name.startsWith(search)
+    );
+  }
+  if (limit) {
+    searchedProducts = searchedProducts.splice(0, Number(limit));
+  }
+
+  if (searchedProducts.length < 1) {
+    return res.status(200).json({ success: true, data:[]});
+  }
+  res.status(200).json(searchedProducts);
+});
+
+app.get("/api/products/:productId/reviews/:reviewId", (req, res) => {
+  console.log(req.params);
+});
+
+app.listen(9000, () => {
+  console.log("server is running on port 9000");
+});
