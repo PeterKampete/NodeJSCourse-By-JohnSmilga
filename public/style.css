@@ -1,0 +1,31 @@
+.container {
+  width: 400px;
+  height: 180px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin-top: 40px;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.input {
+  margin: 10px;
+  width: 90%;
+  padding: 5px;
+}
+.button {
+  margin: 10px;
+  width: 93%;
+  padding: 3px;
+  margin-bottom: 5px;
+  background-color: cyan;
+  border: 0;
+}
+.button:hover {
+  bottom: 2px solid black;
+}
+label {
+  margin: 10px;
+}
